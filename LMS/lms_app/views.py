@@ -49,5 +49,5 @@ def delete(request, id):
     book_detele = get_object_or_404(Book, id=id)
     if request.method == 'POST':
         book_detele.delete()
-        return redirect('index')
+        return redirect('/')
     return render(request, 'pages/delete.html')
