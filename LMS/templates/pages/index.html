@@ -21,14 +21,14 @@
               <div class="card">
                 <div class="card-header border-0">
                   <div class="d-flex justify-content-between">
-                    <h3 class="card-title">اجمالي عدد الكتب</h3>                    
+                    <h3 class="card-title">Total number of books</h3>                    
                   </div>
                 </div>
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span class="text-bold text-lg">500</span>
-                      <span>اجمالي عدد الكتب</span>
+                      <span class="text-bold text-lg">{{allbooks}}</span>
+                      <span>Total number of books</span>
                     </p>  
                   </div>
                   <!-- /.d-flex -->
@@ -42,17 +42,61 @@
             </div>
             <!-- /.col-md-6 -->
             
+
+            {% for book in books %}
+              {% if book.price != None %}
+              {% if book.status == 'sold' %}
+                <p class="totalprice">{{book.price}}</p>
+              {% endif %}
+              {% endif %}
+              {% if book.total_rental != None %}
+              {% if book.status == 'rental' %}
+                <p class="totalprice">{{book.total_rental}}</p>
+              {% endif %}
+              {% endif %}
+
+
+            {% endfor %}
+
+            <!-- coooo -->
+
+            {% for book in books %}
+            {% if book.status == 'rental' %}
+            {% if book.total_rental != None %}
+            <p class="totalrental">{{book.total_rental}}</p>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            <p class="salaryrental"></p>
+            <!-- cooool -->
+            {% for book in books %}
+            {% if book.status == 'sold' %}
+            {% if book.price != 'None' %}
+            <p class="totalsold">{{book.price}}</p>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            <p class="salarysold"></p>
+
+
+
+
+
+
+
+
+
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-header border-0">
                   <div class="d-flex justify-content-between">
-                    <h3 class="card-title">الارباح</h3>   
+                    <h3 class="card-title">Profits</h3>   
                   </div>
                 </div>    
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span id="totalsalarys" class="text-bold text-lg">$250</span><br></p>
+                      <span id="totalsalarys" class="text-bold text-lg">$</span><br></p>
                   </div>
                   <!-- /.d-flex -->
   
@@ -62,11 +106,11 @@
   
                   <div class="d-flex flex-row justify-content-end">
                     <span class="mr-2">
-                      <i class="fas fa-square text-primary"></i> الاربح من بيع الكتب
+                      <i class="fas fa-square text-primary"></i> Profit from selling books
                       <p id="soldtotals"></p>     
                     </span>
                     <span>
-                      <i class="fas fa-square text-gray"></i> الارباح من استعارة الكتب
+                      <i class="fas fa-square text-gray"></i> Profits from borrowing books
                       <p id="rentedtotals"></p>
                     </span>
                   </div>
@@ -111,11 +155,11 @@
           <div class="row justify-content-center mb-3">
             <div class="col-4 ">
               <ul class="nav">
-                {% for cat in categories|slice:'4' %}
-                <li class="nav-item ">
+            {% for cat in categories|slice:'4' %}
+                <li class="nav-item cat{{cat.id}}">
                   <a id="" class="nav-link bg-primary" href="#">{{cat.name}}</a>
                 </li>
-                {% endfor %}
+              {% endfor %}
               </ul>
             </div>
           </div>
@@ -127,7 +171,7 @@
 
             {% for book in books %}
           <!-- الكتب -->
-              <div id="" class="col-md-4">
+              <div id="" class="col-md-4 bookhide book{{book.category.id}} book{{book.status}}">
                   <!-- Widget: user widget style 1 -->
                 <div id="" class="card card-widget widget-user ">
                   <!-- Add the bg color to the header using any of the bg-* classes -->

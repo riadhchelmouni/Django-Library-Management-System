@@ -20,12 +20,24 @@ def index(request):
         'books': Book.objects.all(),
         'form': BookForm(),
         'formcat': CategoryForm(),
+        'allbooks': Book.objects.filter(active=True).count(),
+        'booksold': Book.objects.filter(status='sold').count(),
+        'bookrental': Book.objects.filter(status='rented').count(),
+        'bookavailable': Book.objects.filter(status='available').count(),
     }
     return render(request, 'pages/index.html', context)
 def books(request):
+    search = Book.objects.all()
+    title = None
+    if 'search_name' in request.GET:
+        title = request.GET['search_name']
+        if title:
+            search = search.filter(title__icontains=title)
+    
+    
     context = {
         'categories': Category.objects.all(),
-        'books': Book.objects.all(),
+        'books': search,
     }
     return render(request, 'pages/books.html', context) 
 
