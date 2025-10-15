@@ -84,7 +84,7 @@ docker run -p 8000:8000 django-library
 │   │   ├── settings.py
 │   │   ├── urls.py
 │   │   └── wsgi.py
-│   ├── <your app folders>/
+│   ├── <app folders>/
 │   └── templates/
 │
 └── README.md
