@@ -42,6 +42,9 @@ Docker
  (optional for containerized setup)
 2️⃣ Installation (Local)
 
+### 🧰 Installation (Local)
+
+```bash
 # Clone the repository
 git clone https://github.com/<your-username>/Django-Library-Management-System.git
 cd Django-Library-Management-System/LMS
@@ -58,5 +61,53 @@ python manage.py migrate
 
 # Run the development server
 python manage.py runserver
-
+```
 Access the app at http://127.0.0.1:8000/
+
+3️⃣ Run with Docker
+```
+# Build Docker image
+docker build -t django-library .
+
+# Run container
+docker run -p 8000:8000 django-library
+```
+🧩 Project Structure
+```Django-Library-Management-System/
+│
+├── Dockerfile
+├── requirements.txt
+├── LMS/
+│   ├── manage.py
+│   ├── db.sqlite3
+│   ├── LMS/
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── <your app folders>/
+│   └── templates/
+│
+└── README.md
+```
+🧪 Usage
+
+Login to the admin panel: /admin/
+
+Add or manage books and users.
+
+Borrow or return books via the user interface.
+
+🤝 Contributing
+
+Contributions are welcome!
+Feel free to fork this repository, create a new branch, and submit a pull request.
+
+📜 License
+
+This project is licensed under the MIT License — see the LICENSE file for details.
+
+👤 Author
+
+Yazid Riadh Chelmouni
+🌍 Fullstack Developer — Django & React
+📧 chelmouni.yazidriadh@gmail.com
